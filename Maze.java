@@ -22,6 +22,12 @@ public class Maze {
     }
   }
 
+  public static void main(String[] args) {
+    Maze m = new Maze("Maze1.txt");
+    
+
+  }
+
 
 
 }
