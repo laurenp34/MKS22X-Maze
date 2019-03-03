@@ -18,7 +18,7 @@ public class Maze {
   You ma also assume the maze has a border of '#' around the edges.
   So you don't have to check for out of bounds!
 */
-  public Maze(String filename) throws FileNotFoundException{
+  public Maze(String fileName) {
     //COMPLETE CONSTRUCTOR
     String mazeString = "";
     int rows = 0;
@@ -72,8 +72,23 @@ public class Maze {
     System.out.println("\033[2J\033[1;1H");
   }
 
+  /*Return the string that represents the maze.
+  It should look like the text file with some characters replaced.
+ */
+  public String toString(){
+    String result = "";
+    for (char[] row: maze) {
+      for (char c: row) {
+        result += c;
+      }
+      result += "\n";
+    }
+    return result;
+  }
+
   public static void main(String[] args) {
     Maze m = new Maze("data1.dat");
+    System.out.println(m);
 
 
 
