@@ -106,36 +106,37 @@ public class Maze {
     //erase the S
     maze[startR][startC ] = ' ';
     //and start solving at the location of the s.
-    return solve(startR,startC);
+    return solve(startR,startC,0);
             //return solve(???,???);
   }
 
-  public int solve(int r,int c) {
+  public int solve(int r,int c,int count) {
 
     //automatic animation! You are welcome.
     if(animate){
       clearTerminal();
       System.out.println(this);
-      wait(20);
+      wait(100);
     }
-
-    int count = 0;
 
     //COMPLETE SOLVE
 
-    if (maze[r][c] == 'E') return 1;
+    if (maze[r][c] == 'E') return count;
 
     int[] stepR = {1,-1,0,0};
     int[] stepC = {0,0,1,-1};
 
     for (int i=0;i<4;i++) {
-      if (maze[r+stepR[i]][c+stepC[i]] == ' ') {
-        maze[r+stepR[i]][c+stepC[i]] = '@';
-        return count + solve(r+stepR[i],c+stepC[i]);
+      int nextR = r+stepR[i];
+      int nextC = c+stepC[i];
+      if (maze[nextR][nextC] == ' ') {
+        maze[nextR][nextC] = '@';
+        count += solve(nextR,nextC,count);
+        maze[r][c] = ' ';
       }
     }
-    maze[r][c] = ' ';
-    return -1;
+    return count;
+
   }
 
 
