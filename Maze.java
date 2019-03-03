@@ -104,23 +104,43 @@ public class Maze {
     }
 
     //erase the S
-    maze[r][c] = ' ';
-
+    maze[startR][startC ] = ' ';
     //and start solving at the location of the s.
-    return solve(startR,startC);
+    return solve(startR,startC,0);
             //return solve(???,???);
   }
 
-  public int solve(r,c,steps) {
+  public int solve(int r,int c,int steps) {
+
+    //automatic animation! You are welcome.
+    if(animate){
+      clearTerminal();
+      System.out.println(this);
+      wait(20);
+    }
+
+//COMPLETE SOLVE
+return -1; //so it compiles
+
     if (maze[r][c] == 'E') return steps;
 
+    int[] stepR = {1,-1,0,0};
+    int[] stepC = {0,0,1,-1};
 
+    for (int i=0;i<4;i++) {
+      if (maze[r+stepR[i]][c+stepC[i]] == ' ') {
+        maze[r+stepR[i]][c+stepC[i]] = '@';
+        return solve(r+stepR[i],c+stepC[i],steps++);
+      }
+    }
+    maze[r][c] = ' ';
+    return -1;
   }
 
 
   public static void main(String[] args) {
-    Maze m = new Maze("data1.dat");
-    System.out.println(m);
+    //Maze m = new Maze("data1.dat");
+    //System.out.println(m);
 
 
 
