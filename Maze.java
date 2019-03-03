@@ -1,6 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class Maze {
   private char[][] maze;
@@ -29,14 +28,20 @@ public class Maze {
     System.out.println(mazeString);
     maze = new char[rows][cols];
 
-    int r=0;
-    int c=0;
-    while ()
+    int curChar = 0;
+    for (int r=0;r<rows;r++) {
+      for (int c=0;c<cols;c++) {
+        maze[r][c] = mazeString.charAt(curChar);
+        curChar ++;
+      }
+    }
+
+    System.out.println(Arrays.deepToString(maze));
 
   }
 
   public static void main(String[] args) {
-    Maze m = new Maze("Maze1.txt");
+    Maze m = new Maze("data1.dat");
 
 
 
