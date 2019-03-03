@@ -86,6 +86,38 @@ public class Maze {
     return result;
   }
 
+  /*Wrapper Solve Function returns the helper function
+      Note the helper function has the same name, but different parameters.
+      Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
+    */
+  public int solve(){
+    //find the location of the S.
+    int startR = 0;
+    int startC = 0;
+    for (int r=0;r<maze.length;r++) {
+      for (int c=0;c<maze[r].length;c++) {
+        if (maze[r][c] == 'S') {
+          startR = r;
+          startC = c;
+        }
+      }
+    }
+
+    //erase the S
+    maze[r][c] = ' ';
+
+    //and start solving at the location of the s.
+    return solve(startR,startC);
+            //return solve(???,???);
+  }
+
+  public int solve(r,c,steps) {
+    if (maze[r][c] == 'E') return steps;
+
+
+  }
+
+
   public static void main(String[] args) {
     Maze m = new Maze("data1.dat");
     System.out.println(m);
