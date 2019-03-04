@@ -40,7 +40,7 @@ public class Maze {
       System.exit(1);
     }
 
-    System.out.println(mazeString);
+    //System.out.println(mazeString);
     maze = new char[rows][cols];
 
     int curChar = 0;
@@ -51,7 +51,7 @@ public class Maze {
       }
     }
 
-    System.out.println(Arrays.deepToString(maze));
+    //System.out.println(Arrays.deepToString(maze));
 
   }
 
