@@ -90,7 +90,7 @@ public class Maze {
       Note the helper function has the same name, but different parameters.
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
-  public int solve(){
+  public boolean solve(){
     //find the location of the S.
     int startR = 0;
     int startC = 0;
@@ -106,22 +106,25 @@ public class Maze {
     //erase the S
     maze[startR][startC ] = ' ';
     //and start solving at the location of the s.
-    return solve(startR,startC,0);
+    return solve(startR,startC);
             //return solve(???,???);
   }
 
-  public int solve(int r,int c,int count) {
+  public boolean solve(int r,int c) {
 
     //automatic animation! You are welcome.
+
     if(animate){
       clearTerminal();
       System.out.println(this);
       wait(100);
     }
 
+    if (maze[r][c] == 'E') return true;
+
+    int steps = 0;
     //COMPLETE SOLVE
 
-    if (maze[r][c] == 'E') return count;
 
     int[] stepR = {1,-1,0,0};
     int[] stepC = {0,0,1,-1};
@@ -129,23 +132,27 @@ public class Maze {
     for (int i=0;i<4;i++) {
       int nextR = r+stepR[i];
       int nextC = c+stepC[i];
+
       if (maze[nextR][nextC] == ' ') {
+        //steps ++;
         maze[nextR][nextC] = '@';
-        count += solve(nextR,nextC,count);
-        maze[r][c] = ' ';
+        if (solve(nextR,nextC)) {
+          return true;
+        }
+
+
       }
     }
-    return count;
+    return false;
 
   }
 
-
   public static void main(String[] args) {
-    //Maze m = new Maze("data1.dat");
-    //System.out.println(m);
-
-
-
+    Maze m = new Maze("data1.dat");
+    m.setAnimate(true);
+    System.out.println(m);
+    System.out.println(m.solve());
+    System.out.println(m);
   }
 
 
