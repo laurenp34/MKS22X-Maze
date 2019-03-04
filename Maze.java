@@ -90,7 +90,7 @@ public class Maze {
       Note the helper function has the same name, but different parameters.
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
-  public boolean solve(){
+  public int solve(){
     //find the location of the S.
     int startR = 0;
     int startC = 0;
@@ -110,7 +110,7 @@ public class Maze {
             //return solve(???,???);
   }
 
-  public boolean solve(int r,int c, int steps) {
+  public int solve(int r,int c, int steps) {
     //System.out.println(this);
 
     //automatic animation! You are welcome.
@@ -121,6 +121,7 @@ public class Maze {
             char save = maze[r][c];
             maze[r][c] = '\u2588';
             System.out.println(this);
+            System.out.println("steps: "+steps);
             maze[r][c] = save;
             wait(200);
     }
@@ -136,24 +137,25 @@ public class Maze {
       int nextR = r+stepR[i];
       int nextC = c+stepC[i];
 
-      if (maze[nextR][nextC] == 'E') return true;
+      if (maze[nextR][nextC] == 'E') return steps;
 
       //if space is free:
       if (maze[nextR][nextC] == ' ') {
-        //steps ++;
 
+        steps ++;
         maze[nextR][nextC] = '@'; //mark off the space.
-        if (solve(nextR,nextC,0)) {
-          return true;
+        int result = solve(nextR,nextC,steps);
+        if (result != -1) {
+          return result;
         }
-
+        steps --;
         maze[nextR][nextC] = '.';
 
 
 
       }
     }
-    return false;
+    return -1;
 
   }
 
